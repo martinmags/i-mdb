@@ -1,0 +1,97 @@
+/* 150vh = 100vh + 50vh */
+#page{
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+/* 80vh */
+#bg-container{
+  display: flex;
+  height: 100vh;
+  width: 80vw;
+}
+@keyframes showOut{
+  from{opacity: 1; }
+  to{ opacity: 0; }
+}
+@keyframes showIn{
+  from{ opacity: 0; }
+  to{ opacity: 1; }
+}
+
+/* 20 */
+#side-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 20vw;
+}
+
+#login-container, #signup-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  position: absolute;
+}
+/* Default setting: signup is hidden */
+#signup-container{ display: none; }
+
+
+#header{
+  display: flex;
+  justify-content: center;
+  height: 5vh;
+  font-size: 2em;
+  font-weight: 400;
+  align-items: center;
+}
+
+#login-form, #signup-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 30vh;
+  width: inherit;
+}
+
+#signup-txt, #login-txt{
+  display: flex;
+  justify-content: center;
+}
+#signup-btn, #login-btn{
+  border: none;
+  color: darkblue;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+/* Responsive - Smaller width */
+@media only screen
+and (max-width : 1061px) {
+  #page{
+    flex-direction: column;
+    font-size: .9em;
+  }
+
+  #bg-container{
+    width: 100vw;
+    height:60vh;
+  }
+
+  #side-container{
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100vw;
+    height: 40vh;
+  }
+
+  #signup-txt, #login-txt{
+    width: 100vw;
+  }
+}

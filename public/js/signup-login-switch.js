@@ -6,8 +6,8 @@ const signUpLoginContainerBottom = document.getElementById("signup-login-contain
 
 signUpBtn.addEventListener("click", turnToSignUp);
 function turnToSignUp(){
-  loginContainer.style= "animation: showOut 2s forwards";
-  signupContainer.style="animation: showIn 2s forwards";
+  loginContainer.style= "animation: show .5s forwards";
+  signupContainer.style="animation: show .5s reverse";
   loginContainer.style.display = "none";
   signupContainer.style.display = "block";
 }
@@ -15,8 +15,8 @@ function turnToSignUp(){
 const loginBtn = document.getElementById("login-btn");
 loginBtn.addEventListener("click", turnToLogin);
 function turnToLogin(){
-  loginContainer.style= "animation: showOut 2s reverse"; 
-  signupContainer.style="animation: showIn 2s reverse";
+  loginContainer.style= "animation: show .5s reverse"; 
+  signupContainer.style="animation: show .5s forwards";
   loginContainer.style.display = "block";
   signupContainer.style.display = "none";
 

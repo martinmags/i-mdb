@@ -56,7 +56,7 @@ var listEl = document.querySelector('#checklist');
 
 // NOTE: function for editing movie data
 function editMovie(e) {
-
+  disable();
   console.log("target: ", e.target);
 
   let eventNode = e.target;
@@ -177,7 +177,10 @@ function editMovie(e) {
     console.log("addresponsetext: ",JSON.parse(xhrUpdate.responseText));
 
     displayEditedMovie(movieNode, updatedMovie);
+    enable();
   });
+
+  cnlBtn.addEventListener("click", ()=>{ enable(); });
 
 
 
@@ -252,13 +255,13 @@ function displayNewMovie(movie) {
   //create edit node and append
   let ediNode = document.createElement("p");
   ediNode.setAttribute("class", "edit");
-  ediNode.innerHTML = `<img src="pen1.png" alt="pen icon"> Edit`;
+  ediNode.innerHTML = `<img src="/media/pen1.png" alt="pen icon"> Edit`;
   divNode.appendChild(ediNode);
 
   //create delete node and append
   let delNode = document.createElement("p");
   delNode.setAttribute("class", "dlt");
-  delNode.innerHTML = `<img src="trash1.jpg" alt="trash icon"> Delete`;
+  delNode.innerHTML = `<img src="/media/trash1.jpg" alt="trash icon"> Delete`;
   divNode.appendChild(delNode);
 
   outEl.appendChild(divNode);
@@ -280,6 +283,7 @@ function displayNewMovie(movie) {
 
 // NOTE: function that handels the even when deleted is clicked on
 function deleteMovie(e) {
+  disable();
   console.log("going to delete this movie: ", e);
   // console.log("movie 2 id: ", movie2id);
 
@@ -348,8 +352,9 @@ function deleteMovie(e) {
     if(outputNode.children.length == 0) {
       outEl.appendChild(noMovies);
     }
+    enable();
   });
-
+  cnlBtn.addEventListener("click", ()=>{ enable(); });
 
   diaEl.open = true;
 
@@ -404,11 +409,6 @@ function addMovDia() {
   //   console.log('http reponse string == empty');
   // }
 
-
-
-
-
-
   movFormEl.innerHTML =
   `
     <label> Title:
@@ -440,29 +440,13 @@ function addMovDia() {
     <input type="submit" name="subBtn" id="subBtn" value="Save">
   `;
 
-
-
+  disable();
   subBtn.addEventListener("click", function () {
-    let valTitle = document.querySelector('#title').value;
-    let valYear = document.querySelector('#year').value;
-    let valRating = document.querySelector('#rating').value;
-    let valGenre = document.querySelector('#genre').value;
-    let valUsrRate = document.querySelector('#userRating').value;
-    let valImgURL = document.querySelector('#image').value;
-    //let movLen = movies.length;
-    //movies.push(new Movie(valTitle, valYear, valRating, valGenre, valUsrRate, valImgURL, movLen));
-    //localStorage.setItem('styArray', JSON.stringify(movies));
-    // if(outEl.children.length == 0 && outEl.childNodes.length != 0) {
-    //   outEl.removeChild(noMovies);
-    // }
-
-
     var formData = new FormData(movFormEl);
     var payL = new URLSearchParams(formData).toString();
 
     console.log("form formData1: ", formData);
     console.log("payL str1: ", payL);
-
 
     for (var [key, value] of formData.entries()) {
       console.log(key, value);
@@ -490,13 +474,16 @@ function addMovDia() {
 
     //xhrAdd.send(`title=${valTitle}&year=${valYear}&genre=${valGenre}&rating=${valRating}&userRating=${valUsrRate}&image=${valImgURL}`);
 
-
     console.log("form data: ", formData);
     console.log("reponseText of adding movie: ", xhrAdd.responseText);
     console.log("respTxt json: ", JSON.parse(xhrAdd.responseText));
 
     diaEl.open = false;
+    enable();
   });
+
+  cnlBtn.addEventListener("click", () => {enable();});
+
 
   // var formData1 = new FormData(movFormEl);
   // var payL1 = new URLSearchParams(formData1).toString();
@@ -507,17 +494,51 @@ function addMovDia() {
   diaEl.open = true;
 
   setTimeout(() => {
-                  var editBtnsList = document.getElementsByClassName('edit');
-                  var dletBtnsList = document.getElementsByClassName('dlt');
+    var editBtnsList = document.getElementsByClassName('edit');
+    var dletBtnsList = document.getElementsByClassName('dlt');
 
-                  // console.log(editBtnsList.item(0));
-                  for (let i = 0; i < editBtnsList.length; i++) {
-                    editBtnsList.item(i).addEventListener("click", editMovie);
-                    dletBtnsList.item(i).addEventListener("click", deleteMovie);
-                  }
+    // console.log(editBtnsList.item(0));
+    for (let i = 0; i < editBtnsList.length; i++) {
+      editBtnsList.item(i).addEventListener("click", editMovie);
+      dletBtnsList.item(i).addEventListener("click", deleteMovie);
+    }}, 0
+  );
 
-          }, 0);
+}
 
+/**
+ * disable()
+ * - Disables buttons and lowers opacity of background
+ */
+function disable(){
+  const page = document.getElementById("page");
+  let editBtnsList = document.getElementsByClassName('edit');
+  let dletBtnsList = document.getElementsByClassName('dlt');
+
+  // console.log(editBtnsList.item(0));
+  for (let i = 0; i < editBtnsList.length; i++) {
+    editBtnsList.item(i).style = "display: none";
+    dletBtnsList.item(i).style = "display: none";
+  }
+  page.style = "opacity: 0.1";
+}
+/**
+ * enable()
+ * - Enables buttons and brings back opacity
+ */
+function enable(){
+  const page = document.getElementById("page");
+  setTimeout(() => {
+    var editBtnsList = document.getElementsByClassName('edit');
+    var dletBtnsList = document.getElementsByClassName('dlt');
+
+    // console.log(editBtnsList.item(0));
+    for (let i = 0; i < editBtnsList.length; i++) {
+      editBtnsList.item(i).style = "display: block";
+      dletBtnsList.item(i).style = "display: block";
+    }}, 0
+  );
+  page.style = "opacity: 1";
 }
 
 var mlEl = document.querySelector('#movieList');
@@ -544,20 +565,19 @@ function outList(e) {
 }
 
 
-listEl.addEventListener('click', outList);
+// listEl.addEventListener('click', outList);
 
 // NOTE: adding event listeners for each edit and delete buttons of a movie
 //this is repeated throughout the module
 addMovEl.addEventListener("click", addMovDia);
 
 setTimeout(() => {
-                var editBtnsList = document.getElementsByClassName('edit');
-                var dletBtnsList = document.getElementsByClassName('dlt');
+  var editBtnsList = document.getElementsByClassName('edit');
+  var dletBtnsList = document.getElementsByClassName('dlt');
 
-                // console.log(editBtnsList.item(0));
-                for (let i = 0; i < editBtnsList.length; i++) {
-                  editBtnsList.item(i).addEventListener("click", editMovie);
-                  dletBtnsList.item(i).addEventListener("click", deleteMovie);
-                }
-
-        }, 0);
+  // console.log(editBtnsList.item(0));
+  for (let i = 0; i < editBtnsList.length; i++) {
+    editBtnsList.item(i).addEventListener("click", editMovie);
+    dletBtnsList.item(i).addEventListener("click", deleteMovie);
+  }}, 0
+);

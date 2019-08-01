@@ -4,36 +4,47 @@ body {
   background-position: top;
   background-attachment: scroll; 
   background-clip: content-box;
+  color: white;
 }
 
 body > * {text-align: center; }
 
+/* Set dimensions and flex layout */
 #page {
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
   width: 100vw;
   height: 100vh;
 }
 
-#page > .content {
+/* 10vh */
+#header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 10vh;
+  width: 100vw;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+/* height:85vh || width:5vw*/
+#content {
   display: flex; 
   flex-direction: column;
-  width: 100vw; 
+  width: 70vw; 
   height: 100vh;
   justify-content: flex-start;
+  align-items: center;
 }
 
-.content > h1 {
-  color: white;
-  order: 0;
-}
-
-.content > #result {
+#content > #result {
   color: white;
   display: flex;
   flex-direction: column;
-
-  order: 1;
+  width: inherit;
 
   border-right: 21px double #009992;
   border-left: 21px double #009992;
@@ -41,62 +52,50 @@ body > * {text-align: center; }
   border-radius: 40px 40px 40px 40px;
 }
 
-.content > #result div {
-
+#result div {
   display: flex;
   flex-direction: row;
-
 }
 
-.content > #result > div > p {
-  flex-grow: 0;
-  flex-shrink: 0;
-}
 
-.content > #result > div > p.title {
-
-  flex-basis: 0;
-  flex-grow: 1;
-}
-.content > #result > div > p.year {
-
-  flex-basis: 0;
-  flex-grow: 1;
-
-}
-
-.content > #result > div > p.rating {
-
-  flex-basis: 0;
-  flex-grow: 1;
-}
-
-.content > #result > div > p.edit > img {
+#content > #result > div > p.edit > img {
   width: 20px;
   height: 20px;
   position: relative;
   top: 10%;
 }
 
-.content > #result > div > p.edit {
+/* width: 25vw */
+p.title{
+  display:flex;
+  width: 23vw;
+  justify-content: flex-start;
+  margin-left: 2vw;
+}
 
+/* total width: 20vw */
+p.year, p.rating, p.genre, p.usrRating{
+  width: 5vw;
+  justify-content: flex-start;
+}
+/* width: 15vw */
+p.image{
+  width: 15vw;
+  justify-content: flex-start;
+}
+
+
+p.edit {
   margin: 5px;
-  flex-grow: 1;
-
-
-  border: 0.1em solid #FFFFFF;
-
+  border: 0.2em solid #FFFFFF;
   border-radius:0.12em;
   box-sizing: border-box;
   color: black;
   background-color: white;
-
-  max-width: 5.5em;
+  /* flex-grow: 1; */
 }
 
-
-
-.content > #result > div > p.edit:hover {
+#content > #result > div > p.edit:hover {
   color: white;
   background-color: black;
   cursor: pointer;
@@ -104,14 +103,14 @@ body > * {text-align: center; }
 }
 
 
-.content > #result > div > p.dlt > img {
+#content > #result > div > p.dlt > img {
   width: 20px;
   height: 20px;
   position: relative;
   top: 10%;
 }
 
-.content > #result > div > p.dlt {
+#content > #result > div > p.dlt {
 
   margin: 5px;
   flex-grow: 1;
@@ -125,14 +124,14 @@ body > * {text-align: center; }
   max-width: 5.5em;
 }
 
-.content > #result > div > p.dlt:hover {
+#content > #result > div > p.dlt:hover {
   color: white;
   background-color: black;
 
   cursor: pointer;
 }
 
-.content > #addmov {
+#content > #addmov {
   color: white;
   width: 10%;
   order: 2;
@@ -147,16 +146,17 @@ body > * {text-align: center; }
   background-color: transparent;
 }
 
-.content > #addmov:hover {
+#content > #addmov:hover {
   color: black;
   background-color: white;
   cursor: pointer;
 }
 
 
-.content > #dilg[open] {
-    position: relative;
+#dilg[open] {
+    position: absolute;
     color: white;
+    top: 40%;
     order: 3;
     width: 500px;
     height: 200px;
@@ -166,15 +166,12 @@ body > * {text-align: center; }
     max-height: 75vh;
     background-color: rgba(0,0,0, 0.3);
     display: flex;
-
     align-self:  center;
-
     justify-content: center !important;
     align-items: center;
-
 }
 
-.content > #dilg form {
+#content > #dilg form {
   background-color: transparent;
   display: flex;
   flex-flow: row wrap;
@@ -185,7 +182,7 @@ body > * {text-align: center; }
   height: 100%;
 }
 
-.content > #dilg form label {
+#content > #dilg form label {
   order: 0;
   flex-grow: 1;
   flex-basis: 100%;
@@ -194,7 +191,7 @@ body > * {text-align: center; }
 
 }
 
-.content > #dilg form label#delQ {
+#content > #dilg form label#delQ {
   order: 0;
   display: flex;
   flex-flow: row wrap;
@@ -255,12 +252,11 @@ label#delQ > input#subBtn:hover {
   cursor: pointer;
 }
 
-.content > #dilg form input[type="submit"] {
-
+#content > #dilg form input[type="submit"] {
   flex-basis: 0;
 }
 
-.content > #dilg > form > input#cnlBtn
+#content > #dilg > form > input#cnlBtn
 {
   flex-grow: 0;
   align-self: center;
@@ -274,14 +270,14 @@ label#delQ > input#subBtn:hover {
   background-color: transparent;
 }
 
-.content > #dilg > form > input#cnlBtn:hover
+#content > #dilg > form > input#cnlBtn:hover
 {
   color: black;
   background-color: white;
   cursor: pointer;
 }
 
-.content > #dilg > form > input#subBtn
+#content > #dilg > form > input#subBtn
 {
   flex-grow: 0;
   align-self: center;
@@ -294,9 +290,10 @@ label#delQ > input#subBtn:hover {
   box-sizing: border-box;
   color: white;
   background-color: transparent;
+  
 }
 
-.content > #dilg > form > input#subBtn:hover
+#content > #dilg > form > input#subBtn:hover
 {
   color: black;
   background-color: white;

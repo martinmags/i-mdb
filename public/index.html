@@ -8,18 +8,19 @@
     <link rel="stylesheet" type="text/css" href="/css/reset.css">
     <link rel="stylesheet" type="text/css" href="/css/index.css">
   </head>
-  <body id="page">
-    <div class="content">
-      <h1 style="margin: 4px 0;">Movie List</h1>
-      <output id="result"></output>
-      <button type="button" name="addmov" id="addmov">Add Movie</button>
-      <button type="button" id="checklist">Check Movie List on DB</button>
-      <output id="movieList"></output>
-      <dialog id="dilg">
-        <form method="dialog" id="movForm" name="movForm">
-        </form>
-      </dialog>
+  <body>
+    <div id="page">
+      <h1 id="header" style="margin: 4px 0;">Welcome to I'MDB!</h1>
+      <div id="content">
+        <output id="result"></output>
+        <button type="button" name="addmov" id="addmov">Add Movie</button>
+        <!-- <button type="button" id="checklist">Check Movie List on DB</button> -->
+        <output id="movieList"></output>
+      </div>
     </div>
+    <dialog id="dilg">
+      <form method="dialog" id="movForm" name="movForm"></form>
+    </dialog>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>

@@ -3,7 +3,6 @@
 // localStorage.setItem('styArray', JSON.stringify(movies));
 var access_token = document.cookie;
 
-
 // NOTE: references DOM objecys of elements from the document
 var outEl = document.querySelector('#result');
 var noMovies = document.createTextNode("No movies currently listed ");
@@ -24,8 +23,10 @@ function Movie(title, year, rating, genre, usrRating, imageURL, movID) {
 function relogin() {
   const usrEP = `http://introweb.tech/api/Users/login`;
 
+  // user payload
   let usrPL = 'username=tempuse1&password=temppass1';
 
+  // Creates an http req object
   let oReq = new XMLHttpRequest();
 
   oReq.onload = function() {
@@ -43,11 +44,7 @@ function relogin() {
 
 
   //console.log("access_token to: ", JSON.parse(accToken)['id']);
-
-
-
   console.log("new access_token (eof relogin) is: ", access_token);
-
 }
 
 // NOTE: preloaded movies will only call once then comment it out
@@ -59,12 +56,13 @@ function preloadMovies() {
 }
 
 // NOTE: function for displaying movies on page onload
+
 function defaultMovies() {
   //UNCOMMENT THE LINE BELOW THE FIRST TIME ITS RUN TO SHOW THE PRELOADED MOVIES
   //preloadMovies();
 
   if(access_token) {
-        console.log("access_token value is (in defaultMovies firstline): ", access_token);
+    console.log("access_token value is (in defaultMovies firstline): ", access_token);
   }
   else {
     console.log("no access_token, setting it now");
@@ -97,9 +95,6 @@ function defaultMovies() {
   //console.log("movie2 id: ", movie2id);
 
   let movies = movjson.movies;
-
-
-
 
   for (let i = 0; i < movies.length; i++) {
 
@@ -249,14 +244,6 @@ window.onload = defaultMovies;
 // else {
 //   console.log('http reponse string == empty');
 // }
-
-
-
-
-
-
-
-
 
 
 //exports

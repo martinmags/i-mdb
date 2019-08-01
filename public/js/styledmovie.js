@@ -1,4 +1,3 @@
-
 // NOTE: movies arary holds data and is stored in localStorage
 // var movies = localStorage.getItem('styArray') ? JSON.parse(localStorage.getItem('styArray')) : new Array();
 // localStorage.setItem('styArray', JSON.stringify(movies));
@@ -149,13 +148,13 @@ function defaultMovies() {
     //create edit node and append
     let ediNode = document.createElement("p");
     ediNode.setAttribute("class", "edit");
-    ediNode.innerHTML = `<img src="pen1.png" alt="pen icon"> Edit`;
+    ediNode.innerHTML = `<img src="/media/pen1.png" alt="pen icon"> Edit`;
     divNode.appendChild(ediNode);
 
     //create delete node and append
     let delNode = document.createElement("p");
     delNode.setAttribute("class", "dlt");
-    delNode.innerHTML = `<img src="trash1.jpg" alt="trash icon"> Delete`;
+    delNode.innerHTML = `<img src="/media/trash1.jpg" alt="trash icon"> Delete`;
     divNode.appendChild(delNode);
 
     outEl.appendChild(divNode);

@@ -56,8 +56,9 @@ var listEl = document.querySelector('#checklist');
  * - Edit an existing movie's contents.
  */
 function editMovie(e) {
-  disable();
+  //disable();
   console.log("target: ", e.target);
+  console.log("event: ", e);
 
   let eventNode = e.target;
   let editNode;
@@ -88,7 +89,7 @@ function editMovie(e) {
   console.log("tcUsrRate: ", tcUsrRate);
 
   let tcUsrRateVal = tcUsrRate.substring(0, 1);
-  console.log("tcUsrRateValu: ", tcUsrRateValu);
+  console.log("tcUsrRateValu: ", tcUsrRateVal);
 
   let genre = usrRate.previousElementSibling;
   let tcGenre = genre.textContent;

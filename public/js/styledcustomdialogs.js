@@ -1,4 +1,6 @@
-
+/**
+ * Creates a custom dialog for all the button events
+ */
 import {outEl, Movie, access_token} from './styledmovie.js';
 
 // NOTE: references DOM objecys of elements from the document
@@ -7,12 +9,12 @@ var movFormEl = document.querySelector('#movForm');
 var diaEl = document.querySelector('#dilg');
 var listEl = document.querySelector('#checklist');
 
+//Create eventListeners for any edit and delete buttons. Encapsulated in a setTimeout
 setTimeout(() => {
   let editBtnsList = document.getElementsByClassName('edit');
   let dletBtnsList = document.getElementsByClassName('dlt');
   console.log("INBODY edit list", editBtnsList.length);
   console.log("INBODY LENGTH item(0)", editBtnsList.item(0));
-
 
   // console.log(editBtnsList.item(0));
   for (let i = 0; i < editBtnsList.length; i++) {
@@ -24,9 +26,19 @@ setTimeout(() => {
   }
 });
 
-// NOTE: function for editing movie data
+/**
+ * editMovie(e) 
+ * - handles the event of edit being clicked
+ * - gets the target of the event (which is the edit button)
+ * - then it accesses the existing movie properties one by one and sets them as
+ * as the default values in the edit movie dialog.
+ * - This way if a user doesn't input anything for the edited fields in the dialog,
+ * then it uses the existing values of the old movie. 
+ * 
+ * @param {event of clicking on edited button} e 
+ */
 function editMovie(e) {
-  //disable();
+
   console.log("target: ", e.target);
   console.log("event: ", e);
 
@@ -40,32 +52,35 @@ function editMovie(e) {
   }
 
   console.log("new target: ", editNode);
-  //let editNode = e.target;
   let movieNode = editNode.parentElement;
+  console.log("movie node: ", movieNode);
 
-    console.log("movie node: ", movieNode);
-
-  // Causing issues rn
+  // Sets image url
   let image = editNode.previousElementSibling;
   let imgNod = image.children[0];
   let tcImg = imgNod.getAttribute("src");
 
+  // Sets the text content of user rating
   let usrRate = image.previousElementSibling;
   let tcUsrRate = usrRate.textContent;
 
-
+  // Sets the genre
   let genre = usrRate.previousElementSibling;
   let tcGenre = genre.textContent;
 
+  // Sets the rating
   let rating = genre.previousElementSibling;
   let tcRate = rating.textContent;
 
+  // Sets the year
   let year = rating.previousElementSibling;
   let tcYear = year.textContent;
 
+  // Sets the title
   let mTitle = year.previousElementSibling;
   let tcTitl = mTitle.textContent;
 
+  // Creates the HTML
   movFormEl.innerHTML =
   `
     <label> Title:
@@ -99,13 +114,18 @@ function editMovie(e) {
     </div>
   `;
 
+  //strID is each movie containers id attribute with the actual movie id appended to the end
+  //of it like so id=movieID${id}
   let strID = movieNode.id;
+  //is the actual movieid that was appended to the end of each movie container's
+  //we then use this id to refer to the same movie in the database
   let movieID = strID.substring(7);
 
   console.log("strID: ", strID);
   console.log("movieID: ", movieID);
   console.log("event: ", e);
 
+  //event listener for submitting edit form
   subBtn.addEventListener("click", function () {
     let valTitle = document.querySelector('#title').value;
     let valYear = document.querySelector('#year').value;
@@ -114,7 +134,7 @@ function editMovie(e) {
     let valUsrRate = document.querySelector('#userRating').value;
     let valImgURL = document.querySelector('#image').value;
 
-
+    //gets formdata values
     var formData = new FormData(movFormEl);
     var payL = new URLSearchParams(formData).toString();
 
@@ -126,6 +146,7 @@ function editMovie(e) {
       console.log(key, value);
     }
 
+    //xhr request object
     let xhrUpdate = new XMLHttpRequest();
     let updateEP = `https://introweb.tech/api/movies/${movieID}/replace?access_token=${access_token}`;
 
@@ -134,10 +155,12 @@ function editMovie(e) {
     xhrUpdate.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
     xhrUpdate.send(payL);
 
+    //parse the movie data to be readable
     let updatedMovie = JSON.parse(xhrUpdate.responseText);
 
     console.log("addresponsetext: ",JSON.parse(xhrUpdate.responseText));
 
+    //display the updated movie to the users
     displayEditedMovie(movieNode, updatedMovie);
 
   });
@@ -145,11 +168,14 @@ function editMovie(e) {
   diaEl.open = true;
 }
 
-
-
-// NOTE: function for display edited movie in page
+/**
+ * displayEditedMovie(divNode, updatedMovie)
+ * - display edited movie
+ * 
+ * @param divNode - Movie entry container
+ * @param updatedMovie - Movie entry from database
+ */
 function displayEditedMovie(divNode, updatedMovie) {
-
   divNode.children[0].innerHTML = updatedMovie.title;
   divNode.children[1].innerHTML = updatedMovie.year;
   divNode.children[2].innerHTML = updatedMovie.rating;
@@ -159,44 +185,47 @@ function displayEditedMovie(divNode, updatedMovie) {
   imgNode.setAttribute("src", `${updatedMovie.image}`);
 }
 
-
-// NOTE: function that handels the event when is clicked on
+/**
+ * displayNewMovie(movie)
+ * - display new movie
+ * 
+ * @param movie - movie entry from database
+ */
 function displayNewMovie(movie) {
-
   let divNode = document.createElement("div");
   divNode.setAttribute("id", `movieID${movie.id}`);
 
-
-  //create title node and append
+  // Create title node and append
   let ttlNode = document.createElement("p");
   ttlNode.setAttribute("class", "title");
   ttlNode.innerHTML = `${movie.title}`;
   divNode.appendChild(ttlNode);
 
-
-  //create year node and append
+  // Create year node and append
   let yrNode = document.createElement("p");
   yrNode.setAttribute("class", "year");
   yrNode.innerHTML = `${movie.year}`;
   divNode.appendChild(yrNode);
 
-  //create rating node and append
+  // Create rating node and append
   let rtNode = document.createElement("p");
   rtNode.setAttribute("class", "rating");
   rtNode.innerHTML = `${movie.rating}`;
   divNode.appendChild(rtNode);
 
+  // Create genre node and append
   let genreNode = document.createElement("p");
   genreNode.setAttribute("class", "genre");
   genreNode.innerHTML = `${movie.genre}`;
   divNode.appendChild(genreNode);
 
+  // Create user rating node and append
   let usrRtNode = document.createElement("p");
   usrRtNode.setAttribute("class", "usrRating");
-  // Fix star entity output
   usrRtNode.innerHTML = `${movie.userRating}`;
   divNode.appendChild(usrRtNode);
 
+  // Create image node and append
   let imgNode = document.createElement("p");
   imgNode.setAttribute("class", "image");
   let imageNode = document.createElement("img");
@@ -218,28 +247,25 @@ function displayNewMovie(movie) {
   delNode.setAttribute("class", "dlt");
   delNode.innerHTML = `<img src="/media/trash1.jpg" alt="trash icon"> Delete`;
   divNode.appendChild(delNode);
-
   outEl.appendChild(divNode);
 
   setTimeout(() => {
-                  var editBtnsList = document.getElementsByClassName('edit');
-                  var dletBtnsList = document.getElementsByClassName('dlt');
+    var editBtnsList = document.getElementsByClassName('edit');
+    var dletBtnsList = document.getElementsByClassName('dlt');
 
-                  for (let i = 0; i < editBtnsList.length; i++) {
-                    editBtnsList.item(i).addEventListener("click", editMovie);
-                    dletBtnsList.item(i).addEventListener("click", deleteMovie);
-                  }
-          }, 0);
+    for (let i = 0; i < editBtnsList.length; i++) {
+      editBtnsList.item(i).addEventListener("click", editMovie);
+      dletBtnsList.item(i).addEventListener("click", deleteMovie);
+    }
+  }, 0);
 }
 
-
-
-
-// NOTE: function that handels the even when deleted is clicked on
+/**
+ * deleteMovie()
+ * - Delete an existing movie
+ */
 function deleteMovie(e) {
-  //disable();
   console.log("going to delete this movie: ", e);
-
   console.log("target: ", e.target);
 
   let eventNode =  e.target;
@@ -256,10 +282,7 @@ function deleteMovie(e) {
   let movieNode = deltNode.parentElement;
   console.log("movie node: ", movieNode);
 
-
-
   let outputNode = movieNode.parentElement;
-
   movFormEl.innerHTML =
   `
     <label id="delQ"> <p>Delete movie?</p>
@@ -268,6 +291,7 @@ function deleteMovie(e) {
     </label>
   `;
 
+  //delete movie works in the same way editMovie() works from here on out
   let strID = movieNode.id;
   let movieID = strID.substring(7);
 
@@ -288,29 +312,21 @@ function deleteMovie(e) {
     xhrDel.send(null);
     let movjson = JSON.parse(xhrDel.responseText);
 
-    //mlEl.innerHTML = xhrDel.responseText;
-
     console.log(xhrDel.responseText);
     console.log(movjson);
 
-    // if(outputNode.children.length == 0) {
-    //   outEl.appendChild(noMovies);
-    // }
-    //enable();
   });
 
   diaEl.open = true;
-
 }
 
+/**
+ * addMovDia()
+ * - Dialog box for when "Add Movie" button is clicked.
+ */
 function addMovDia() {
-
-  // NOTE: LOGGING IN EACH TIME??
-
   let addEP = `https://introweb.tech/api/movies?access_token=${access_token}`;
-
   console.log("access_token in addMovDialog: ", access_token);
-
 
   movFormEl.innerHTML =
   `
@@ -344,8 +360,9 @@ function addMovDia() {
     </div>
   `;
 
-  //disable();
+  // Event listener for "Submit" btn
   subBtn.addEventListener("click", function () {
+    //form data object convert into a query string
     var formData = new FormData(movFormEl);
     var payL = new URLSearchParams(formData).toString();
 
@@ -356,10 +373,12 @@ function addMovDia() {
       console.log(key, value);
     }
 
+    //http reject for adding a movie
     let xhrAdd = new XMLHttpRequest();
 
     xhrAdd.open('POST', addEP, false);
 
+    //setting header
     xhrAdd.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
     xhrAdd.send(payL);
 
@@ -367,6 +386,7 @@ function addMovDia() {
 
     console.log("addresponsetext: ",JSON.parse(xhrAdd.responseText));
 
+    //display new movie to the user
     displayNewMovie(movie);
 
 
@@ -375,12 +395,9 @@ function addMovDia() {
     console.log("respTxt json: ", JSON.parse(xhrAdd.responseText));
 
     diaEl.open = false;
-    //enable();
   });
 
-
   diaEl.open = true;
-
   setTimeout(() => {
     var editBtnsList = document.getElementsByClassName('edit');
     var dletBtnsList = document.getElementsByClassName('dlt');
@@ -391,12 +408,10 @@ function addMovDia() {
       dletBtnsList.item(i).addEventListener("click", deleteMovie);
     }}, 0
   );
-
 }
 
-
+// Set the eventListeners for all existing buttons
 addMovEl.addEventListener("click", addMovDia);
-
 setTimeout(() => {
   let editBtnsList = document.getElementsByClassName('edit');
   let dletBtnsList = document.getElementsByClassName('dlt');

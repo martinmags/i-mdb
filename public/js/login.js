@@ -1,12 +1,13 @@
-
-//Some degree of messaging or fallback in noscript or API failure situations
-//You will also have to build some mechanism to login and logout of your simple CRUD
-//application ==> LOGOUT!!
-
+//module wide variables
 var loginForm = document.querySelector('#login-form');
 var submitBtn = document.querySelector('#loginSubmit');
-const baseAPI = `http://introweb.tech/api`;
+const baseAPI = `https://introweb.tech/api`;
 
+/**
+ * handleReponseUp
+ * - handles reponse of sign up request, used in place of readystatechange
+ * @param {event of a login requst being loaded} e 
+ */
 function handleResponse(e) {
   let oResp = e.target;
   //if(oReq.readyState == 4 && oReq.status == 200) {
@@ -27,46 +28,28 @@ function handleResponse(e) {
     let status = oResp.status;
 
     console.log("status: code", status);
-    //console.log("respont text: ", JSON.parse(respText));
 
     const access_token = prsdText.id;
 
+    //save the access token in localstorage after successfully logged in
     localStorage.setItem('access_token', access_token);
 
     console.log("access_token: ", access_token);
     console.log("got access_token successfully\nredirecting to content (movielist) page");
     window.location.replace('index.html');
     console.log("LOGIN SUCESSFULL");
-
-    //console.log(JSON.parse(httpResp));
-
-    //console.log("all response headers: ", typeof httpResp);
-  //}
 }
 
-/* <div style="
-  width: 400px;
-  height: 250px;
-  border: 2px solid red;
-  flex-direction: column;
-  flex-flow: column wrap;
-  justify-content: center;
-  align-items: center;" 
-  id="movieID5d41fd01754b235109e96ad4">
-    <p class="title" style="order: 0;">lion king</p>
-    <p class="year" style="order: 0;">1995</p>
-    <p class="rating" style="order: 0;">G</p>
-    <p class="genre" style="order: 0;">an</p>
-    <p class="usrRating" style="order: 0;">1<span id="rating1">★</span></p>
-    <p style="order: 1; bottom: 105px; left:130px;" class="image">
-    <img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg" style="width: 150px; height: 230px"></p>
-    <p class="edit"><img src="pen1.png" alt="pen icon"> Edit</p><p class="dlt"><img src="trash1.jpg" alt="trash icon"> Delete</p>
-</div>  */
 
-//HANDLE LOGIN VALIDATION SOMEWHERE AROUND HERE
+/**
+ * submitRequest
+ * - takes in the login form fields and sends a login request for the user
+ * 
+ * @param {event of a submit being clicked for login} e 
+ */
 function submitRequest (e) {
-  //IMPORTANT: NEED THIS SO PAGE DOESNT REFRESH ON SUBMIT, WHICH CLEARS
-  //THE HTTP REQUEST AND IT FAILS
+  
+  //prevents submit from refreshing page onclick
   e.preventDefault();
   let formData = new FormData(loginForm);
   let payload = new URLSearchParams(formData).toString();
@@ -80,30 +63,10 @@ function submitRequest (e) {
 
   oReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
   oReq.addEventListener("load", handleResponse);
-  // => {
-  // //oReq.onreadystatechange = function () {
-  // let httpResp = oReq.getResponseHeader("Content-Type");
-  // let respText = oReq.responseText;
-  // let status = oReq.status;
-  //
-  // console.log("status: code", status);
-  // console.log("respont text: ", JSON.parse(respText));
-  //
-  // const access_token = JSON.parse(respText)['id'];
-  //
-  // console.log("access_token: ", access_token);
-  //
-  // console.log(JSON.parse(httpResp));
-  //
-  // console.log("all response headers: ", typeof httpResp); //};
-  // });
-
-  //oReq.setRequestHeader("Set-Cookie");
   oReq.send(payload);
 }
 
-
+//eventlistener for submit
 submitBtn.addEventListener("click", submitRequest);
-
 
 export {loginForm, submitRequest, handleResponse, baseAPI};

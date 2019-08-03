@@ -167,7 +167,7 @@ function editMovie(e) {
     }
 
     let xhrUpdate = new XMLHttpRequest();
-    let updateEP = `http://introweb.tech/api/movies/${movieID}/replace?access_token=${access_token}`;
+    let updateEP = `https://introweb.tech/api/movies/${movieID}/replace?access_token=${access_token}`;
 
     xhrUpdate.open('POST', updateEP, false);
 
@@ -340,7 +340,7 @@ function deleteMovie(e) {
 
     let xhrDel = new XMLHttpRequest();
 
-    let ep = `http://introweb.tech/api/movies/${movieID}?access_token=${access_token}`;
+    let ep = `https://introweb.tech/api/movies/${movieID}?access_token=${access_token}`;
     console.log('deleting following movie from db');
     xhrDel.open('DELETE', ep, false);
     xhrDel.send(null);
@@ -396,7 +396,7 @@ function addMovDia() {
 
   // NOTE: LOGGING IN EACH TIME??
 
-  let addEP = `http://introweb.tech/api/movies?access_token=${access_token}`;
+  let addEP = `https://introweb.tech/api/movies?access_token=${access_token}`;
 
   console.log("access_token in addMovDialog: ", access_token);
 
@@ -550,7 +550,7 @@ var movie2id;
 
 function outList(e) {
   let xhrGet = new XMLHttpRequest();
-  let ep = `http://introweb.tech/api/movies/movieList?access_token=${access_token}`;
+  let ep = `https://introweb.tech/api/movies/movieList?access_token=${access_token}`;
   console.log('writing db movie list');
   xhrGet.open('GET', ep, false);
   xhrGet.send(null);

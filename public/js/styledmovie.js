@@ -4,7 +4,7 @@
 // localStorage.setItem('styArray', JSON.stringify(movies));
 const access_token = localStorage.getItem('access_token');
 let logoutBtn = document.querySelector("#content > #logout");
-const baseURL = "http://introweb.tech/api";
+const baseURL = "https://introweb.tech/api";
 
 // NOTE: references DOM objecys of elements from the document
 var outEl = document.querySelector('#result');
@@ -90,7 +90,7 @@ function defaultMovies() {
   }
 
   let xhrGet = new XMLHttpRequest();
-  let ep = `http://introweb.tech/api/movies/movieList?access_token=${access_token}`;
+  let ep = `https://introweb.tech/api/movies/movieList?access_token=${access_token}`;
   console.log('writing db movie list');
   xhrGet.open('GET', ep, false);
 

@@ -22,7 +22,7 @@ function loginAfter(xhr) {
 
 function handleResponseUp(e) {
   let oResp = e.target;
-  const usrEP = `http://introweb.tech/api/Users/login`;
+  const usrEP = `https://introweb.tech/api/Users/login`;
   //if(oReq.readyState == 4 && oReq.status == 200) {
     console.log("type of: ", typeof e);
     console.log("logging event: ", e);
@@ -101,7 +101,7 @@ function submitRequest (e) {
   console.log("form data: ", formData);
   console.log("payload: ", payload);
 
-  const endpoint = `http://introweb.tech/api/Users`;
+  const endpoint = `https://introweb.tech/api/Users`;
 
 
   console.log("paylod for login: ", payload);

@@ -444,7 +444,7 @@ function addMovDia() {
       <input type="text" id="title" name="title">
     </label>
     <label> Year :
-      <input type="number" id="year" name="year">
+      <input minlength="4" maxlength="4" type="number" id="year" name="year">
     </label>
     <label> Genre:
       <input type="text" id="genre" name="genre">

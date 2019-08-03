@@ -128,9 +128,6 @@ function defaultMovies() {
 
   let movies = movjson.movies;
 
-
-
-
   for (let i = 0; i < movies.length; i++) {
 
     if(movies[i] == null) {
@@ -143,6 +140,7 @@ function defaultMovies() {
 
     //create title node and append
     let ttlNode = document.createElement("p");
+
     ttlNode.setAttribute("class", "title");
     ttlNode.innerHTML = `${movies[i].title}`;
     divNode.appendChild(ttlNode);

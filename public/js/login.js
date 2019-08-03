@@ -44,6 +44,24 @@ function handleResponse(e) {
   //}
 }
 
+/* <div style="
+  width: 400px;
+  height: 250px;
+  border: 2px solid red;
+  flex-direction: column;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;" 
+  id="movieID5d41fd01754b235109e96ad4">
+    <p class="title" style="order: 0;">lion king</p>
+    <p class="year" style="order: 0;">1995</p>
+    <p class="rating" style="order: 0;">G</p>
+    <p class="genre" style="order: 0;">an</p>
+    <p class="usrRating" style="order: 0;">1<span id="rating1">★</span></p>
+    <p style="order: 1; bottom: 105px; left:130px;" class="image">
+    <img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg" style="width: 150px; height: 230px"></p>
+    <p class="edit"><img src="pen1.png" alt="pen icon"> Edit</p><p class="dlt"><img src="trash1.jpg" alt="trash icon"> Delete</p>
+</div>  */
 
 //HANDLE LOGIN VALIDATION SOMEWHERE AROUND HERE
 function submitRequest (e) {

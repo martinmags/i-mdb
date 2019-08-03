@@ -170,7 +170,13 @@ function defaultMovies() {
 
     let imgNode = document.createElement("p");
     imgNode.setAttribute("class", "image");
-    imgNode.innerHTML = `${movies[i].image}`;
+    let imageNode = document.createElement("img");
+    imageNode.setAttribute("src", `${movies[i].image}`);
+    imageNode.setAttribute("alt", `Not a valid image link`);
+    imageNode.setAttribute("style", "width: inherit; height: inherit;");
+    imgNode.appendChild(imageNode);
+    //imgNode.innerHTML = `${movie.image}`;
+    //imgNode.innerHTML = `${movies[i].image}`;
     divNode.appendChild(imgNode);
 
     //create edit node and append

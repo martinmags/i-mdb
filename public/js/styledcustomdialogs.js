@@ -92,10 +92,10 @@ function editMovie(e) {
   let usrRate = image.previousElementSibling;
   let tcUsrRate = usrRate.textContent;
 
-  console.log("tcUsrRate: ", tcUsrRate);
-
-  let tcUsrRateVal = tcUsrRate.substring(0, 1);
-  console.log("tcUsrRateValu: ", tcUsrRateVal);
+  // console.log("tcUsrRate: ", tcUsrRate);
+  //
+  // let tcUsrRateVal = tcUsrRate.substring(0, 1);
+  // console.log("tcUsrRateValu: ", tcUsrRateVal);
 
 
 
@@ -136,7 +136,7 @@ function editMovie(e) {
       <input type="text" id="genre" value="${tcGenre}" name="genre">
     </label>
     <label> User rating:
-      <input type="number" id="userRating" value="${tcUsrRateVal}" name="userRating">
+      <input type="number" id="userRating" value="${tcUsrRate}" name="userRating">
     </label>
     <label> Image URL:
       <input type="text" id="image" value="${tcImg}" name="image">
@@ -195,10 +195,10 @@ function editMovie(e) {
     console.log("addresponsetext: ",JSON.parse(xhrUpdate.responseText));
 
     displayEditedMovie(movieNode, updatedMovie);
-    enable();
+    //enable();
   });
 
-  cnlBtn.addEventListener("click", ()=>{ enable(); });
+  //cnlBtn.addEventListener("click", ()=>{ enable(); });
 
 
 
@@ -214,28 +214,12 @@ function displayEditedMovie(divNode, updatedMovie) {
   divNode.children[2].innerHTML = updatedMovie.rating;
   divNode.children[3].innerHTML = updatedMovie.genre;
   divNode.children[4].innerHTML = updatedMovie.userRating;
-  //http://www.gstatic.com/tv/thumb/v22vodart/14113286/p14113286_v_v8_ad.jpg
-  let imageNode = document.createElement("img");
-  imageNode.setAttribute("src", `${updatedMovie.image}`);
-  imageNode.setAttribute("alt", `Not a valid image link`);
-  imageNode.setAttribute("style", "width: inherit; height: inherit;");
-  //imgNode.appendChild(imageNode);
-  divNode.children[5].innerHTML = imageNode;
-
-  outList
-
-
-  //let movieNode = document.querySelector(`${strID}`);
-  // console.log(divNode);
-  // for(let i = 0; i < 6; i++) {
-  //   console.log(divNode.children[i].innerHTML);
-  //   divNode.children[i].innerHTML = movies[movieIndex][j];
-  //   console.log(movies[movieIndex][j]);
-  // }
+  let imgNode = divNode.children[5].children[0];
+  imgNode.setAttribute("src", `${updatedMovie.image}`);
 }
 
 
-// NOTE: function that handels the event when edited is clicked on
+// NOTE: function that handels the event when is clicked on
 function displayNewMovie(movie) {
 
   let divNode = document.createElement("div");
@@ -269,7 +253,7 @@ function displayNewMovie(movie) {
   let usrRtNode = document.createElement("p");
   usrRtNode.setAttribute("class", "usrRating");
   // Fix star entity output
-  usrRtNode.innerHTML = `${movie.userRating}<span>&#9733;</span>`;
+  usrRtNode.innerHTML = `${movie.userRating}`;
   divNode.appendChild(usrRtNode);
 
   let imgNode = document.createElement("p");
@@ -312,7 +296,7 @@ function displayNewMovie(movie) {
 
 // NOTE: function that handels the even when deleted is clicked on
 function deleteMovie(e) {
-  disable();
+  //disable();
   console.log("going to delete this movie: ", e);
   // console.log("movie 2 id: ", movie2id);
 
@@ -381,9 +365,9 @@ function deleteMovie(e) {
     if(outputNode.children.length == 0) {
       outEl.appendChild(noMovies);
     }
-    enable();
+    //enable();
   });
-  cnlBtn.addEventListener("click", ()=>{ enable(); });
+  //cnlBtn.addEventListener("click", ()=>{ enable(); });
 
   diaEl.open = true;
 
@@ -470,7 +454,7 @@ function addMovDia() {
     </div>
   `;
 
-  disable();
+  //disable();
   subBtn.addEventListener("click", function () {
     var formData = new FormData(movFormEl);
     var payL = new URLSearchParams(formData).toString();
@@ -509,10 +493,10 @@ function addMovDia() {
     console.log("respTxt json: ", JSON.parse(xhrAdd.responseText));
 
     diaEl.open = false;
-    enable();
+    //enable();
   });
 
-  cnlBtn.addEventListener("click", () => {enable();});
+  //cnlBtn.addEventListener("click", () => {enable();});
 
 
   // var formData1 = new FormData(movFormEl);
@@ -547,8 +531,8 @@ function disable(){
 
   // console.log(editBtnsList.item(0));
   for (let i = 0; i < editBtnsList.length; i++) {
-    editBtnsList.item(i).style = "display: none";
-    dletBtnsList.item(i).style = "display: none";
+    editBtnsList.item(i).style = "display: inline";
+    dletBtnsList.item(i).style = "display: inline";
   }
   page.style = "opacity: 0.1";
 }
@@ -564,8 +548,8 @@ function enable(){
 
     // console.log(editBtnsList.item(0));
     for (let i = 0; i < editBtnsList.length; i++) {
-      editBtnsList.item(i).style = "display: block";
-      dletBtnsList.item(i).style = "display: block";
+      editBtnsList.item(i).style = "display: inline";
+      dletBtnsList.item(i).style = "display: inline";
     }}, 0
   );
   page.style = "opacity: 1";

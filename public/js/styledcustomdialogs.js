@@ -51,10 +51,10 @@ var listEl = document.querySelector('#checklist');
 //   console.log('http reponse string == empty');
 // }
 
-
-
-
-// NOTE: function for editing movie data
+/**
+ * editMovie()
+ * - Edit an existing movie's contents.
+ */
 function editMovie(e) {
   disable();
   console.log("target: ", e.target);
@@ -69,24 +69,18 @@ function editMovie(e) {
   }
 
   console.log("new target: ", editNode);
-
-
-
   //let editNode = e.target;
   let movieNode = editNode.parentElement;
 
     console.log("movie node: ", movieNode);
 
-  let image = editNode.previousElementSibling;
-  let imgNod = image.children[0];
-  let tcImg = imgNod.getAttribute("src");
+  // Causing issues rn
+  // let image = editNode.previousElementSibling;
+  // let imgNod = image.children[0];
+  // let tcImg = imgNod.getAttribute("src");
   //let tcImg = image.textContent;
 
   console.log("tcImage: ", tcImg);
-
-  //let tc
-
-
 
   let usrRate = image.previousElementSibling;
   let tcUsrRate = usrRate.textContent;
@@ -95,8 +89,6 @@ function editMovie(e) {
 
   let tcUsrRateVal = tcUsrRate.substring(0, 1);
   console.log("tcUsrRateValu: ", tcUsrRateValu);
-
-
 
   let genre = usrRate.previousElementSibling;
   let tcGenre = genre.textContent;
@@ -109,9 +101,6 @@ function editMovie(e) {
 
   let mTitle = year.previousElementSibling;
   let tcTitl = mTitle.textContent;
-
-
-
 
   movFormEl.innerHTML =
   `
@@ -151,7 +140,6 @@ function editMovie(e) {
 
   console.log("strID: ", strID);
   console.log("movieID: ", movieID);
-
   console.log("event: ", e);
 
   subBtn.addEventListener("click", function () {
@@ -198,10 +186,6 @@ function editMovie(e) {
   });
 
   cnlBtn.addEventListener("click", ()=>{ enable(); });
-
-
-
-
   diaEl.open = true;
 }
 
@@ -328,13 +312,9 @@ function deleteMovie(e) {
   else {
     deltNode = eventNode;
   }
-
-
+  
   console.log("new target: ", deltNode);
-
-
   let movieNode = deltNode.parentElement;
-
   console.log("movie node: ", movieNode);
 
 
@@ -510,16 +490,12 @@ function addMovDia() {
     diaEl.open = false;
     enable();
   });
-
   cnlBtn.addEventListener("click", () => {enable();});
-
-
   // var formData1 = new FormData(movFormEl);
   // var payL1 = new URLSearchParams(formData1).toString();
   //
   // console.log("form formData1: ", formData1);
   // console.log("payL str1: ", payL1);
-
   diaEl.open = true;
 
   setTimeout(() => {

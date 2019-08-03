@@ -67,7 +67,7 @@ body > * {text-align: center; }
   overflow: hidden;
 }
 
-p.image{ 
+p.image{
   justify-content: center;
   border-radius: 5px;
   border: 1px solid black;
@@ -137,7 +137,7 @@ p.dlt, p.edit {
   border-radius:0.12em;
   box-sizing: border-box;
   color: white;
-  background-color: transparent; 
+  background-color: transparent;
 }
 
 
@@ -151,7 +151,7 @@ p.dlt, p.edit {
   position: absolute;
   color: white;
   top: 40%;
-  background-color: rgba(0,0,0, 0.3);
+  background-color: rgba(0,0,0, 1);
 }
 #movform input{
   width: 10vw;

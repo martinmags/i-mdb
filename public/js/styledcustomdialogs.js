@@ -1,5 +1,5 @@
 
-import {outEl, noMovies, Movie, access_token} from './styledmovie.js'
+import {outEl, Movie, access_token} from './styledmovie.js';
 
 // NOTE: references DOM objecys of elements from the document
 var addMovEl = document.querySelector('#addmov');
@@ -7,52 +7,23 @@ var movFormEl = document.querySelector('#movForm');
 var diaEl = document.querySelector('#dilg');
 var listEl = document.querySelector('#checklist');
 
-// const usrEP = `http://introweb.tech/api/Users/login`;
-//
-// let usrPL = 'username=tempuse1&password=temppass1';
-//
-// let xhr = new XMLHttpRequest();
-//
-// xhr.open('POST', usrEP, false);
-//
-// xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
-//
-//
-//
-// // xhr.onreadystatechange = function () {
-// //   if (xhr.readyState == 4 && xhr.status == 200) {
-// //     console.log(xhr.responseText);
-// //   }
-// // };
-//
-// xhr.send(usrPL);
-//
-// let httpResp = xhr.getResponseHeader("Content-Type");
-// let respText = xhr.responseText;
-// let status = xhr.status;
-//
-// console.log("status: code", status);
-// console.log("respont text: ", JSON.parse(respText));
-//
-// const access_token = JSON.parse(respText)['id'];
-//
-// let addEP = `http://introweb.tech/api/movies?${access_token}`;
-//
-// console.log("access_token: ", access_token);
-//
-// console.log(httpResp);
-//
-// console.log("all response headers: ", typeof httpResp);
-//
-// if(httpResp) {
-//   console.log("all response headers: ", httpResp);
-// }
-// else {
-//   console.log('http reponse string == empty');
-// }
+setTimeout(() => {
+  let editBtnsList = document.getElementsByClassName('edit');
+  let dletBtnsList = document.getElementsByClassName('dlt');
+  console.log("INBODY edit list", editBtnsList.length);
+  console.log("INBODY LENGTH item(0)", editBtnsList.item(0));
 
 
 
+  // console.log(editBtnsList.item(0));
+  for (let i = 0; i < editBtnsList.length; i++) {
+    console.log("INBODY CONSOLELOG");
+    editBtnsList.item(i).addEventListener("click", editMovie);
+    console.log("INBODY adding event listener for EDITS");
+    dletBtnsList.item(i).addEventListener("click", deleteMovie);
+    console.log("INBODY adding event listener for DELETES");
+  }
+});
 
 // NOTE: function for editing movie data
 function editMovie(e) {
@@ -85,17 +56,10 @@ function editMovie(e) {
 
   console.log("tcImage: ", tcImg);
 
-  //let tc
-
-
 
   let usrRate = image.previousElementSibling;
   let tcUsrRate = usrRate.textContent;
 
-  // console.log("tcUsrRate: ", tcUsrRate);
-  //
-  // let tcUsrRateVal = tcUsrRate.substring(0, 1);
-  // console.log("tcUsrRateValu: ", tcUsrRateVal);
 
 
 
@@ -163,13 +127,6 @@ function editMovie(e) {
     let valUsrRate = document.querySelector('#userRating').value;
     let valImgURL = document.querySelector('#image').value;
 
-    // if(valRating) {
-    //   console.log("new rated: ", valRating);
-    // }
-    // else {
-    //   console.log("new rating not entered, assuming old value of: ", tcRate);
-    //   valRating = tcRate;
-    // }
 
     var formData = new FormData(movFormEl);
     var payL = new URLSearchParams(formData).toString();
@@ -195,16 +152,17 @@ function editMovie(e) {
     console.log("addresponsetext: ",JSON.parse(xhrUpdate.responseText));
 
     displayEditedMovie(movieNode, updatedMovie);
-    //enable();
+
   });
 
-  //cnlBtn.addEventListener("click", ()=>{ enable(); });
 
 
 
 
   diaEl.open = true;
 }
+
+
 
 // NOTE: function for display edited movie in page
 function displayEditedMovie(divNode, updatedMovie) {
@@ -298,10 +256,7 @@ function displayNewMovie(movie) {
 function deleteMovie(e) {
   //disable();
   console.log("going to delete this movie: ", e);
-  // console.log("movie 2 id: ", movie2id);
 
-
-  //event.target gives you the html tag/object the event triggered on/from
   console.log("target: ", e.target);
 
   let eventNode =  e.target;
@@ -342,9 +297,6 @@ function deleteMovie(e) {
 
   subBtn.addEventListener("click", function () {
     movieNode.remove();
-    // delete movies[movieIndex];
-    // localStorage.setItem('styArray', JSON.stringify(movies));
-    // console.log("movies in output: ", outputNode.children.length);
 
     console.log("strID: ", strID);
     console.log("movieID: ", movieID);
@@ -362,47 +314,16 @@ function deleteMovie(e) {
     console.log(xhrDel.responseText);
     console.log(movjson);
 
-    if(outputNode.children.length == 0) {
-      outEl.appendChild(noMovies);
-    }
+    // if(outputNode.children.length == 0) {
+    //   outEl.appendChild(noMovies);
+    // }
     //enable();
   });
-  //cnlBtn.addEventListener("click", ()=>{ enable(); });
 
   diaEl.open = true;
 
 }
 
-// const usrEP = `http://introweb.tech/api/Users/login`;
-//
-// let usrPL = 'username=tempuse1&password=temppass1';
-//
-// let xhr = new XMLHttpRequest();
-//
-// xhr.open('POST', usrEP, false);
-//
-// xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
-//
-//
-//
-// // xhr.onreadystatechange = function () {
-// //   if (xhr.readyState == 4 && xhr.status == 200) {
-// //     console.log(xhr.responseText);
-// //   }
-// // };
-//
-// xhr.send(usrPL);
-//
-// let httpResp = xhr.getResponseHeader("Content-Type");
-// let respText = xhr.responseText;
-// let status = xhr.status;
-//
-// console.log("status: code", status);
-// console.log("respont text: ", JSON.parse(respText));
-//
-// const access_token = JSON.parse(respText)['id'];
-
-// NOTE: function that shows dialog promopt when add new movie is clicked on
 function addMovDia() {
 
   // NOTE: LOGGING IN EACH TIME??
@@ -411,16 +332,6 @@ function addMovDia() {
 
   console.log("access_token in addMovDialog: ", access_token);
 
-  // console.log(httpResp);
-  //
-  // console.log("all response headers: ", typeof httpResp);
-  //
-  // if(httpResp) {
-  //   console.log("all response headers: ", httpResp);
-  // }
-  // else {
-  //   console.log('http reponse string == empty');
-  // }
 
   movFormEl.innerHTML =
   `
@@ -480,14 +391,6 @@ function addMovDia() {
     displayNewMovie(movie);
 
 
-    // xhr.onreadystatechange = function () {
-    //   if (xhr.readyState == 4 && xhr.status == 200) {
-    //     console.log(xhr.responseText);
-    //   }
-    // };
-
-    //xhrAdd.send(`title=${valTitle}&year=${valYear}&genre=${valGenre}&rating=${valRating}&userRating=${valUsrRate}&image=${valImgURL}`);
-
     console.log("form data: ", formData);
     console.log("reponseText of adding movie: ", xhrAdd.responseText);
     console.log("respTxt json: ", JSON.parse(xhrAdd.responseText));
@@ -496,14 +399,6 @@ function addMovDia() {
     //enable();
   });
 
-  //cnlBtn.addEventListener("click", () => {enable();});
-
-
-  // var formData1 = new FormData(movFormEl);
-  // var payL1 = new URLSearchParams(formData1).toString();
-  //
-  // console.log("form formData1: ", formData1);
-  // console.log("payL str1: ", payL1);
 
   diaEl.open = true;
 
@@ -520,78 +415,23 @@ function addMovDia() {
 
 }
 
-/**
- * disable()
- * - Disables buttons and lowers opacity of background
- */
-function disable(){
-  const page = document.getElementById("page");
-  let editBtnsList = document.getElementsByClassName('edit');
-  let dletBtnsList = document.getElementsByClassName('dlt');
 
-  // console.log(editBtnsList.item(0));
-  for (let i = 0; i < editBtnsList.length; i++) {
-    editBtnsList.item(i).style = "display: inline";
-    dletBtnsList.item(i).style = "display: inline";
-  }
-  page.style = "opacity: 0.1";
-}
-/**
- * enable()
- * - Enables buttons and brings back opacity
- */
-function enable(){
-  const page = document.getElementById("page");
-  setTimeout(() => {
-    var editBtnsList = document.getElementsByClassName('edit');
-    var dletBtnsList = document.getElementsByClassName('dlt');
-
-    // console.log(editBtnsList.item(0));
-    for (let i = 0; i < editBtnsList.length; i++) {
-      editBtnsList.item(i).style = "display: inline";
-      dletBtnsList.item(i).style = "display: inline";
-    }}, 0
-  );
-  page.style = "opacity: 1";
-}
-
-var mlEl = document.querySelector('#movieList');
-
-var movie2id;
-
-function outList(e) {
-  let xhrGet = new XMLHttpRequest();
-  let ep = `https://introweb.tech/api/movies/movieList?access_token=${access_token}`;
-  console.log('writing db movie list');
-  xhrGet.open('GET', ep, false);
-  xhrGet.send(null);
-  let movjson = JSON.parse(xhrGet.responseText);
-
-  mlEl.innerHTML = xhrGet.responseText;
-
-  console.log(xhrGet.responseText);
-  console.log(movjson);
-  console.log(movjson.movies);
-  console.log(movjson.movies[1]);
-  console.log(movjson.movies[1].id);
-  movie2id = movjson.movies[1].id;
-  console.log("movie2 id: ", movie2id);
-}
-
-
-// listEl.addEventListener('click', outList);
-
-// NOTE: adding event listeners for each edit and delete buttons of a movie
-//this is repeated throughout the module
 addMovEl.addEventListener("click", addMovDia);
 
 setTimeout(() => {
-  var editBtnsList = document.getElementsByClassName('edit');
-  var dletBtnsList = document.getElementsByClassName('dlt');
+  let editBtnsList = document.getElementsByClassName('edit');
+  let dletBtnsList = document.getElementsByClassName('dlt');
+  console.log("INBODY edit list", editBtnsList.length);
+  console.log("INBODY LENGTH item(0)", editBtnsList.item(0));
+
+
 
   // console.log(editBtnsList.item(0));
   for (let i = 0; i < editBtnsList.length; i++) {
+    console.log("INBODY CONSOLELOG");
     editBtnsList.item(i).addEventListener("click", editMovie);
+    console.log("INBODY adding event listener for EDITS");
     dletBtnsList.item(i).addEventListener("click", deleteMovie);
-  }}, 0
-);
+    console.log("INBODY adding event listener for DELETES");
+  }
+});

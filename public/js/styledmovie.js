@@ -1,7 +1,10 @@
+
 // NOTE: movies arary holds data and is stored in localStorage
 // var movies = localStorage.getItem('styArray') ? JSON.parse(localStorage.getItem('styArray')) : new Array();
 // localStorage.setItem('styArray', JSON.stringify(movies));
-var access_token = document.cookie;
+const access_token = localStorage.getItem('access_token');
+let logoutBtn = document.querySelector(".content > #logout");
+const baseURL = "http://introweb.tech/api";
 
 // NOTE: references DOM objecys of elements from the document
 var outEl = document.querySelector('#result');
@@ -21,30 +24,39 @@ function Movie(title, year, rating, genre, usrRating, imageURL, movID) {
 }
 
 function relogin() {
-  const usrEP = `http://introweb.tech/api/Users/login`;
 
-  // user payload
-  let usrPL = 'username=tempuse1&password=temppass1';
+  window.location.replace('login-signup.html');
+  // const usrEP = `http://introweb.tech/api/Users/login`;
+  //
+  // let usrPL = 'username=tempuse1&password=temppass1';
+  //
+  // let oReq = new XMLHttpRequest();
+  //
+  //
+  //
+  // oReq.open('POST', usrEP, true);
+  //
+  // //oReq.setRequestHeader('Set-cookie', `${oReq.responseText}`);
+  // oReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
+  //
+  // oReq.onload = function() {
+  //   console.log("access_token in relogin: ", JSON.parse(oReq.responseText)['id']);
+  //   access_token = JSON.parse(oReq.responseText)['id'];
+  //   document.cookie = `${access_token}`;
+  //   console.log("new access_token (after setting in-- relogin) is: ", access_token);
+  // }
+  //
+  //
+  //
+  // oReq.send(usrPL);
+  //
+  //
+  // //console.log("access_token to: ", JSON.parse(accToken)['id']);
+  //
+  //
+  //
+  // console.log("new access_token (eof relogin) is: ", access_token);
 
-  // Creates an http req object
-  let oReq = new XMLHttpRequest();
-
-  oReq.onload = function() {
-    console.log("access_token in relogin: ", JSON.parse(oReq.responseText)['id']);
-    access_token = JSON.parse(oReq.responseText)['id'];
-    document.cookie = `${access_token}`;
-    console.log("new access_token (after setting in-- relogin) is: ", access_token);
-  }
-
-  oReq.open('POST', usrEP, true);
-
-  oReq.setRequestHeader('Set-cookie', `${oReq.responseText}`);
-  oReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
-  oReq.send(usrPL);
-
-
-  //console.log("access_token to: ", JSON.parse(accToken)['id']);
-  console.log("new access_token (eof relogin) is: ", access_token);
 }
 
 // NOTE: preloaded movies will only call once then comment it out
@@ -56,18 +68,18 @@ function preloadMovies() {
 }
 
 // NOTE: function for displaying movies on page onload
-
 function defaultMovies() {
   //UNCOMMENT THE LINE BELOW THE FIRST TIME ITS RUN TO SHOW THE PRELOADED MOVIES
   //preloadMovies();
 
-  if(access_token) {
-    console.log("access_token value is (in defaultMovies firstline): ", access_token);
-  }
-  else {
+  if(!access_token) {
     console.log("no access_token, setting it now");
     relogin();
     console.log("new access_token is: ", access_token);
+
+  }
+  else {
+    console.log("access_token value is (in defaultMovies firstline): ", access_token);
   }
 
   console.log("value of access_token in defaultMovies: ", access_token);
@@ -81,20 +93,43 @@ function defaultMovies() {
   let ep = `http://introweb.tech/api/movies/movieList?access_token=${access_token}`;
   console.log('writing db movie list');
   xhrGet.open('GET', ep, false);
+
+  let movjson;
+  xhrGet.onload = function() {
+    if(xhrGet.status == 200) {
+      movjson = JSON.parse(xhrGet.responseText);
+    }
+    // console.log("access_token in relogin: ", JSON.parse(oReq.responseText)['id']);
+    // access_token = JSON.parse(oReq.responseText)['id'];
+    // document.cookie = `${access_token}`;
+    // console.log("new access_token (after setting in-- relogin) is: ", access_token);
+  }
+
+
+
   xhrGet.send(null);
-  let movjson = JSON.parse(xhrGet.responseText);
+
+
+
+
+  //let movjson = JSON.parse(xhrGet.responseText);
 
   //mlEl.innerHTML = xhrGet.responseText;
 
   console.log(xhrGet.responseText);
   console.log(movjson);
+  //ERROR HERE: on startup
+  //Uncaught TypeError: Cannot read property 'movies' of undefined
+  //  at defaultMovies (VM657 styledmovie.js:119)
   console.log(movjson.movies);
-  console.log(movjson.movies[1]);
-  console.log(movjson.movies[1].id);
+
   //movie2id = movjson.movies[1].id;
   //console.log("movie2 id: ", movie2id);
 
   let movies = movjson.movies;
+
+
+
 
   for (let i = 0; i < movies.length; i++) {
 
@@ -143,13 +178,13 @@ function defaultMovies() {
     //create edit node and append
     let ediNode = document.createElement("p");
     ediNode.setAttribute("class", "edit");
-    ediNode.innerHTML = `<img src="/media/pen1.png" alt="pen icon"> Edit`;
+    ediNode.innerHTML = `<img src="pen1.png" alt="pen icon"> Edit`;
     divNode.appendChild(ediNode);
 
     //create delete node and append
     let delNode = document.createElement("p");
     delNode.setAttribute("class", "dlt");
-    delNode.innerHTML = `<img src="/media/trash1.jpg" alt="trash icon"> Delete`;
+    delNode.innerHTML = `<img src="trash1.jpg" alt="trash icon"> Delete`;
     divNode.appendChild(delNode);
 
     outEl.appendChild(divNode);
@@ -163,6 +198,19 @@ function defaultMovies() {
     }
   }
 }
+
+
+logoutBtn.addEventListener("click", () => {
+  const endpoint = `${baseURL}/Users/logout?access_token=${access_token}`;
+  let xhrLeave = new XMLHttpRequest();
+  xhrLeave.open("POST", endpoint, true);
+  xhrLeave.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
+  xhrLeave.send(null);
+  console.log("LOGGED OUT: redirecting TO LOGIN PAGE");
+  localStorage.removeItem('access_token');
+  window.location.replace('login-signup.html');
+})
+
 
 
 // NOTE: display movies from localStorage on load
@@ -244,6 +292,14 @@ window.onload = defaultMovies;
 // else {
 //   console.log('http reponse string == empty');
 // }
+
+
+
+
+
+
+
+
 
 
 //exports

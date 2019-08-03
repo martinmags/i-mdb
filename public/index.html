@@ -9,8 +9,42 @@
     <link rel="stylesheet" type="text/css" href="/css/index.css">
   </head>
   <body>
+
+    .content > #logout {
+        position: absolute;
+        top: 1em;
+        right: 1em;
+      }
+
+
+    <!-- NOTE: CARD DESIGN SUGGESTION___________ALSO REMOVE FLEX GROWN ON THE ITEMS
+    <div style="
+            width: 400px;
+            height: 250px;
+            border: 2px solid red;
+            flex-direction: column;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
+            " id="movieID5d41fd01754b235109e96ad4"><p class="title" style="
+    order: 0;
+">lion king</p><p class="year" style="
+    order: 0;
+">1995</p><p class="rating" style="order: 0;">G</p><p class="genre" style="
+    order: 0;
+">an</p><p class="usrRating" style="order: 0;">1<span id="rating1">★</span></p><p style="
+          /* display: block; */
+          /* float: right; */
+          order: 1;
+          /* position: relative; */
+          bottom: 105px;
+          left:130px;
+          " class="image">
+    <img src="https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_.jpg" style="width: 150px; height: 230px">
+  </p><p class="edit"><img src="pen1.png" alt="pen icon"> Edit</p><p class="dlt"><img src="trash1.jpg" alt="trash icon"> Delete</p></div> -->
     <div id="page">
       <h1 id="header" style="margin: 4px 0;">Welcome to I'MDB!</h1>
+      <button type="button" name="logout" id="logout">Logout</button>
       <div id="content">
         <output id="result"></output>
         <button type="button" name="addmov" id="addmov">Add Movie</button>

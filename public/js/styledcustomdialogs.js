@@ -246,7 +246,8 @@ function displayNewMovie(movie) {
 
   let usrRtNode = document.createElement("p");
   usrRtNode.setAttribute("class", "usrRating");
-  usrRtNode.innerHTML = `${movie.userRating}`;
+  // Fix star entity output
+  usrRtNode.innerHTML = `<span>&star;</span>${movie.userRating}`;
   divNode.appendChild(usrRtNode);
 
   let imgNode = document.createElement("p");
@@ -267,7 +268,6 @@ function displayNewMovie(movie) {
   divNode.appendChild(delNode);
 
   outEl.appendChild(divNode);
-
 
   setTimeout(() => {
                   var editBtnsList = document.getElementsByClassName('edit');

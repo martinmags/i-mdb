@@ -71,7 +71,7 @@ function submitRequest (e) {
   let formData = new FormData(loginForm);
   let payload = new URLSearchParams(formData).toString();
 
-  const usrEP = `http://introweb.tech/api/Users/login`;
+  const usrEP = `https://introweb.tech/api/Users/login`;
 
   console.log("paylod for login: ", payload);
 

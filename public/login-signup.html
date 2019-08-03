@@ -14,13 +14,18 @@
 </head>
 <body id="page">
   <!-- Consider doing offline first design -->
-  <img id="bg-container" src="/media/movie-reel.jpg" alt="img-placeholder">
-
+  <img id="bg-container" title="movie reel background" src="/media/movie-reel.jpg" alt="img-placeholder">
   <!-- Container that vertically centers the login/sign up -->
   <div id="side-container">
     <!-- Login Form -->
     <div id="login-container">
+      
       <h1 id="header">LOGIN</h1>
+
+      <noscript style="text-align: center; background-color: red; color: white; font-size: 1.2em;">
+        Please make sure Javascript is enabled in your browser to use this website.
+      </noscript>
+
       <form id="login-form">
         <label>Username/Email:<br>
           <input type="text" required autocomplete="username" id="username" name="username">

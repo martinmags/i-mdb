@@ -32,7 +32,7 @@ body > * {text-align: center; }
 
 /* height:85vh || width:5vw*/
 #content {
-  display: flex;
+  display: flex;400px
   flex-direction: column;
   width: 70vw;
   height: 100vh;
@@ -52,19 +52,20 @@ body > * {text-align: center; }
   padding: 0;
   border-radius: 40px 40px 40px 40px;
   overflow-y:scroll;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 #result div{
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
-  width: 255px;
-  height: 300px;
+  width: 30vw;
+  height: 250px;
   margin: 10px;
   border: 2px solid red;
   background-color: green;
   order: 0;
+  overflow: hidden;
 }
 
 p.image{ 
@@ -74,8 +75,9 @@ p.image{
   background-color: gray;
   align-items: center;
   width: 150px;
-  height: 250px;
+  height: 200px;
   order: 1;
+  overflow: hidden;
 }
 #content p{
   display: flex;
@@ -83,25 +85,9 @@ p.image{
   margin-top: 10px;
 }
 
-/* width: 25vw */
-/* p.title{
-  display:flex;
-  width: 23vw;
-  justify-content: flex-start;
-  margin-left: 2vw;
-} */
-
-/* total width: 20vw */
-/* p.year, p.rating, p.genre, p.usrRating{
-  width: 5vw;
-  justify-content: flex-start;
-} */
-/* width: 15vw */
-/* p.image{
+p.title, p.rating, p.genre, p.year, p.usrRating{
   width: 15vw;
-  justify-content: flex-start;
-} */
-
+}
 
 
 /* Buttons */
@@ -109,7 +95,6 @@ p.dlt > img, p.edit > img{
   width: 20px;
   height: 20px;
   position: relative;
-  top: 10%;
 }
 p.dlt, p.edit {
   margin: 5px;
@@ -119,6 +104,8 @@ p.dlt, p.edit {
   color: black;
   background-color: white;
   max-width: 5.5em;
+  justify-content: center;
+  align-items: center
 }
 #addmov:hover, #logout:hover, p.edit:hover, p.dlt:hover {
   color: black;
@@ -158,7 +145,6 @@ p.dlt, p.edit {
 #dilg[open] {
   display: flex;
   height: 40vh;
-  width: 20vw;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -172,9 +158,9 @@ p.dlt, p.edit {
 }
 form{
   display: flex;
+  width: inherit;
   flex-direction: column;
   justify-content: space-evenly;
-  width: inherit;
   height: inherit;
 }
 label {
@@ -184,7 +170,7 @@ label {
   margin-top: 3px;
   width: inherit;
 }
-#subBtn, #cnlBtn{width: 5vw;}
+#subBtn, #cnlBtn{width: 10vw;}
 #btns{
   display: flex;
   flex-direction: row;

@@ -107,11 +107,18 @@ p.dlt, p.edit {
   justify-content: center;
   align-items: center
 }
-#addmov:hover, #logout:hover, p.edit:hover, p.dlt:hover {
+#addmov:hover, #logout:hover {
   color: black;
   background-color: white;
   cursor: pointer;
 }
+
+p.edit:hover, p.dlt:hover{
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
 #logout{
   position: absolute;
   color: white;

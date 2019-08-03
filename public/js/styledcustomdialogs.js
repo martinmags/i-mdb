@@ -102,10 +102,10 @@ function editMovie(e) {
   `
     <label> Title:
       <input type="text" id="title" value="${tcTitl}" name="title">
-    </label><br>
+    </label>
     <label> Year :
       <input type="text" id="year" value="${tcYear}" name="year">
-    </label><br>
+    </label>
     <label> Rating:
       <select form="movForm" id="rating" name="rating" required>
         <option value="${tcRate}" selected hidden>${tcRate}</option>
@@ -115,7 +115,7 @@ function editMovie(e) {
         <option value="R">R</option>
         <option value="NR">NR</option>
       </select>
-    </label><br>
+    </label>
     <label> Genre:
       <input type="text" id="genre" value="${tcGenre}" name="genre">
     </label>
@@ -125,8 +125,10 @@ function editMovie(e) {
     <label> Image URL:
       <input type="text" id="image" value="${tcImg}" name="image">
     </label>
-    <input type="submit" name="cnlBtn" id="cnlBtn" value="Cancel">
-    <input type="submit" name="subBtn" id="subBtn" value="Save">
+    <div id="btns">
+      <input type="submit" name="cnlBtn" id="cnlBtn" value="Cancel">
+      <input type="submit" name="subBtn" id="subBtn" value="Save">
+    </div>
   `;
 
   let strID = movieNode.id;
@@ -413,10 +415,10 @@ function addMovDia() {
   `
     <label> Title:
       <input type="text" id="title" name="title">
-    </label><br>
+    </label>
     <label> Year :
       <input type="number" id="year" name="year">
-    </label><br>
+    </label>
     <label> Genre:
       <input type="text" id="genre" name="genre">
     </label>
@@ -428,16 +430,17 @@ function addMovDia() {
         <option value="R">R</option>
         <option value="NR">NR</option>
       </select>
-    </label><br>
+    </label>
     <label> User rating:
       <input type="number" id="userRating" name="userRating">
     </label>
     <label> Image URL:
       <input type="text" id="image" name="image">
     </label>
-
-    <input type="submit" name="cnlBtn" id="cnlBtn" value="Cancel">
-    <input type="submit" name="subBtn" id="subBtn" value="Save">
+    <div id="btns">
+      <input type="submit" name="cnlBtn" id="cnlBtn" value="Cancel">
+      <input type="submit" name="subBtn" id="subBtn" value="Save">
+    </div>
   `;
 
   disable();

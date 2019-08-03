@@ -9,6 +9,23 @@ const baseURL = "https://introweb.tech/api";
 // NOTE: references DOM objecys of elements from the document
 var outEl = document.querySelector('#result');
 //var noMovies = document.createTextNode("No movies currently listed ");
+setTimeout(() => {
+  let editBtnsList = document.getElementsByClassName('edit');
+  let dletBtnsList = document.getElementsByClassName('dlt');
+  console.log("INBODY edit list", editBtnsList.length);
+  console.log("INBODY LENGTH item(0)", editBtnsList.item(0));
+
+
+
+  // console.log(editBtnsList.item(0));
+  for (let i = 0; i < editBtnsList.length; i++) {
+    console.log("INBODY CONSOLELOG");
+    editBtnsList.item(i).addEventListener("click", editMovie);
+    console.log("INBODY adding event listener for EDITS");
+    dletBtnsList.item(i).addEventListener("click", deleteMovie);
+    console.log("INBODY adding event listener for DELETES");
+  }
+});
 
 // NOTE: movie object function
 function Movie(title, year, rating, genre, usrRating, imageURL, movID) {
@@ -189,13 +206,27 @@ logoutBtn.addEventListener("click", () => {
   console.log("LOGGED OUT: redirecting TO LOGIN PAGE");
   localStorage.removeItem('access_token');
   window.location.replace('login-signup.html');
-})
-
+});
 
 
 // NOTE: display movies from localStorage on load
 window.onload = defaultMovies;
 
+setTimeout(() => {
+  let editBtnsList = document.getElementsByClassName('edit');
+  let dletBtnsList = document.getElementsByClassName('dlt');
+  console.log("INBODY edit list", editBtnsList.length);
+  console.log("INBODY LENGTH item(0)", editBtnsList.item(0));
 
+
+  // console.log(editBtnsList.item(0));
+  for (let i = 0; i < editBtnsList.length; i++) {
+    console.log("INBODY CONSOLELOG");
+    editBtnsList.item(i).addEventListener("click", editMovie);
+    console.log("INBODY adding event listener for EDITS");
+    dletBtnsList.item(i).addEventListener("click", deleteMovie);
+    console.log("INBODY adding event listener for DELETES");
+  }
+});
 //exports
 export {outEl, Movie, access_token}

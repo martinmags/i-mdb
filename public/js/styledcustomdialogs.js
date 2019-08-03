@@ -13,13 +13,6 @@ setTimeout(() => {
   console.log("INBODY edit list", editBtnsList.length);
   console.log("INBODY LENGTH item(0)", editBtnsList.item(0));
 
-<<<<<<< HEAD
-/**
- * editMovie()
- * - Edit an existing movie's contents.
- */
-=======
-
 
   // console.log(editBtnsList.item(0));
   for (let i = 0; i < editBtnsList.length; i++) {
@@ -32,7 +25,6 @@ setTimeout(() => {
 });
 
 // NOTE: function for editing movie data
->>>>>>> a741affc173e582d6bae47b335c7764b08906a79
 function editMovie(e) {
   //disable();
   console.log("target: ", e.target);
@@ -54,17 +46,10 @@ function editMovie(e) {
     console.log("movie node: ", movieNode);
 
   // Causing issues rn
-  // let image = editNode.previousElementSibling;
-  // let imgNod = image.children[0];
-  // let tcImg = imgNod.getAttribute("src");
-  //let tcImg = image.textContent;
+  let image = editNode.previousElementSibling;
+  let imgNod = image.children[0];
+  let tcImg = imgNod.getAttribute("src");
 
-  console.log("tcImage: ", tcImg);
-
-<<<<<<< HEAD
-=======
-
->>>>>>> a741affc173e582d6bae47b335c7764b08906a79
   let usrRate = image.previousElementSibling;
   let tcUsrRate = usrRate.textContent;
 
@@ -157,14 +142,6 @@ function editMovie(e) {
 
   });
 
-<<<<<<< HEAD
-  cnlBtn.addEventListener("click", ()=>{ enable(); });
-=======
-
-
-
-
->>>>>>> a741affc173e582d6bae47b335c7764b08906a79
   diaEl.open = true;
 }
 
@@ -400,17 +377,8 @@ function addMovDia() {
     diaEl.open = false;
     //enable();
   });
-<<<<<<< HEAD
-  cnlBtn.addEventListener("click", () => {enable();});
-  // var formData1 = new FormData(movFormEl);
-  // var payL1 = new URLSearchParams(formData1).toString();
-  //
-  // console.log("form formData1: ", formData1);
-  // console.log("payL str1: ", payL1);
-=======
 
 
->>>>>>> a741affc173e582d6bae47b335c7764b08906a79
   diaEl.open = true;
 
   setTimeout(() => {
@@ -434,8 +402,6 @@ setTimeout(() => {
   let dletBtnsList = document.getElementsByClassName('dlt');
   console.log("INBODY edit list", editBtnsList.length);
   console.log("INBODY LENGTH item(0)", editBtnsList.item(0));
-
-
 
   // console.log(editBtnsList.item(0));
   for (let i = 0; i < editBtnsList.length; i++) {

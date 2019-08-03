@@ -1,0 +1,44 @@
+
+// const usrEP = `http://introweb.tech/api/Users/login`;
+//
+// let usrPL = 'username=tempuse1&password=temppass1';
+//
+// let xhr = new XMLHttpRequest();
+//
+// xhr.open('POST', usrEP, false);
+//
+// xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
+//
+//
+//
+// // xhr.onreadystatechange = function () {
+// //   if (xhr.readyState == 4 && xhr.status == 200) {
+// //     console.log(xhr.responseText);
+// //   }
+// // };
+//
+// xhr.send(usrPL);
+//
+// let httpResp = xhr.getResponseHeader("Content-Type");
+// let respText = xhr.responseText;
+// let status = xhr.status;
+//
+// console.log("status: code", status);
+// console.log("respont text: ", JSON.parse(respText));
+//
+// const access_token = JSON.parse(respText)['id'];
+//
+// let addEP = `http://introweb.tech/api/movies?${access_token}`;
+//
+// console.log("access_token: ", access_token);
+//
+// console.log(httpResp);
+//
+// console.log("all response headers: ", typeof httpResp);
+//
+// if(httpResp) {
+//   console.log("all response headers: ", httpResp);
+// }
+// else {
+//   console.log('http reponse string == empty');
+// }

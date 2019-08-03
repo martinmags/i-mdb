@@ -8,7 +8,7 @@ const baseURL = "https://introweb.tech/api";
 
 // NOTE: references DOM objecys of elements from the document
 var outEl = document.querySelector('#result');
-var noMovies = document.createTextNode("No movies currently listed ");
+//var noMovies = document.createTextNode("No movies currently listed ");
 
 // NOTE: movie object function
 function Movie(title, year, rating, genre, usrRating, imageURL, movID) {
@@ -59,18 +59,9 @@ function relogin() {
 
 }
 
-// NOTE: preloaded movies will only call once then comment it out
-function preloadMovies() {
-  movies[0] = new Movie("Star Wars", 1977, "PG", 0);
-  movies[1] = new Movie("The Empire Strikes Back", 1980, "PG", 1);
-  movies[2] = new Movie("The Revenge of the Jedi", 1983, "PG", 2);
-  localStorage.setItem('styArray', JSON.stringify(movies));
-}
-
 // NOTE: function for displaying movies on page onload
 function defaultMovies() {
-  //UNCOMMENT THE LINE BELOW THE FIRST TIME ITS RUN TO SHOW THE PRELOADED MOVIES
-  //preloadMovies();
+
 
   if(!access_token) {
     console.log("no access_token, setting it now");
@@ -84,10 +75,6 @@ function defaultMovies() {
 
   console.log("value of access_token in defaultMovies: ", access_token);
 
-  if(outEl.children.length == 0) {
-
-    outEl.appendChild(noMovies);
-  }
 
   let xhrGet = new XMLHttpRequest();
   let ep = `https://introweb.tech/api/movies/movieList?access_token=${access_token}`;
@@ -99,10 +86,6 @@ function defaultMovies() {
     if(xhrGet.status == 200) {
       movjson = JSON.parse(xhrGet.responseText);
     }
-    // console.log("access_token in relogin: ", JSON.parse(oReq.responseText)['id']);
-    // access_token = JSON.parse(oReq.responseText)['id'];
-    // document.cookie = `${access_token}`;
-    // console.log("new access_token (after setting in-- relogin) is: ", access_token);
   }
 
 
@@ -110,12 +93,7 @@ function defaultMovies() {
   xhrGet.send(null);
 
 
-
-
-  //let movjson = JSON.parse(xhrGet.responseText);
-
-  //mlEl.innerHTML = xhrGet.responseText;
-
+ //USERNAME: akjshdlaj
   console.log(xhrGet.responseText);
   console.log(movjson);
   //ERROR HERE: on startup
@@ -123,8 +101,6 @@ function defaultMovies() {
   //  at defaultMovies (VM657 styledmovie.js:119)
   console.log(movjson.movies);
 
-  //movie2id = movjson.movies[1].id;
-  //console.log("movie2 id: ", movie2id);
 
   let movies = movjson.movies;
 
@@ -170,7 +146,13 @@ function defaultMovies() {
 
     let imgNode = document.createElement("p");
     imgNode.setAttribute("class", "image");
-    imgNode.innerHTML = `${movies[i].image}`;
+    let imageNode = document.createElement("img");
+    imageNode.setAttribute("src", `${movies[i].image}`);
+    imageNode.setAttribute("alt", `Not a valid image link`);
+    imageNode.setAttribute("style", "width: inherit; height: inherit;");
+    imgNode.appendChild(imageNode);
+    //imgNode.innerHTML = `${movie.image}`;
+    //imgNode.innerHTML = `${movies[i].image}`;
     divNode.appendChild(imgNode);
 
     //create edit node and append
@@ -186,14 +168,14 @@ function defaultMovies() {
     divNode.appendChild(delNode);
 
     outEl.appendChild(divNode);
-    if(outEl.children.length == 0 && outEl.childNodes.length == 0) {
-      outEl.appendChild(noMovies);
-    }
+    // if(outEl.children.length == 0 && outEl.childNodes.length == 0) {
+    //   outEl.appendChild(noMovies);
+    // }
 
-    if(outEl.firstChild == noMovies && outEl.lastChild != noMovies)
-    {
-      outEl.removeChild(noMovies);
-    }
+    // if(outEl.firstChild == noMovies && outEl.lastChild != noMovies)
+    // {
+    //   outEl.removeChild(noMovies);
+    // }
   }
 }
 
@@ -214,91 +196,6 @@ logoutBtn.addEventListener("click", () => {
 // NOTE: display movies from localStorage on load
 window.onload = defaultMovies;
 
-// NOTE: MADE AN ACCOUNT WITH USERNAME: tempuse1 PASSWORD: temppass1 EMAIL: tempus1@gmail.com
-// get the access_token yourself manually for testing
-// {
-//   const access_token = 'pl8jtebpLnDSAi9KA';
-//   const endpoint = `http://introweb.tech/api/movies?access_token=${access_token}`;
-//
-//   const usrEP = `http://introweb.tech/api/Users`;
-//
-//   let usrPL = 'username=tempuse1&email=tempuse1@gmail.com&password=temppass1';
-//
-//   // hard code the payload at first
-//   let payload = 'title=Hard+Coded+Again&year=2019&genre=Documentary&rating=G&userRating=5';
-//
-//   /* once you get that to work later you can read the data in and make a payload - since I had done my form nicely and matched the names to the API I could do something like this.
-//
-//   let formData = new FormData(document.querySelector('#addForm'));
-//   let payload = new URLSearchParams(formData).toString();
-//
-//   You might build the query string yourself.  Many ways to do it, but console.log that step by itself to make sure it works before you send it
-//
-//   */
-//
-//   // make the XHR
-//   let xhr = new XMLHttpRequest();
-//   // first try as synchronous then change to async with a callback
-//   xhr.open('POST', usrEP, true);
-//   // make sure you set the right headers
-//   xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
-//   // sent it on it's way
-//   xhr.send(usrPL);
-//   // you could alert here and then use Paw or Postman to see if it made it
-//
-//
-//
-//   // Word of advice, you could use Paw/Postman to add data manually at do the GET first, otherwise do the Add, then the Get then the Delete and then the update
-// }
-
-// const usrEP = `http://introweb.tech/api/Users/login`;
-//
-// let usrPL = 'username=tempuse1&password=temppass1';
-//
-// let xhr = new XMLHttpRequest();
-//
-// xhr.open('POST', usrEP, false);
-//
-// xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
-//
-// // xhr.onreadystatechange = function () {
-// //   if (xhr.readyState == 4 && xhr.status == 200) {
-// //     console.log(xhr.responseText);
-// //   }
-// // };
-//
-// xhr.send(usrPL);
-//
-// let httpResp = xhr.getResponseHeader("Content-Type");
-// let respText = xhr.responseText;
-// let status = xhr.status;
-//
-// console.log("status: code", status);
-// console.log("respont text: ", JSON.parse(respText));
-//
-// const access_token = JSON.parse(respText)['id'];
-//
-// console.log("access_token: ", access_token);
-//
-// console.log(httpResp);
-//
-// console.log("all response headers: ", typeof httpResp);
-//
-// if(httpResp) {
-//   console.log("all response headers: ", httpResp);
-// }
-// else {
-//   console.log('http reponse string == empty');
-// }
-
-
-
-
-
-
-
-
-
 
 //exports
-export {outEl, noMovies, Movie, access_token}
+export {outEl, Movie, access_token}

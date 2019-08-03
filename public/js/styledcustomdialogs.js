@@ -78,10 +78,25 @@ function editMovie(e) {
     console.log("movie node: ", movieNode);
 
   let image = editNode.previousElementSibling;
-  let tcImg = image.textContent;
+  let imgNod = image.children[0];
+  let tcImg = imgNod.getAttribute("src");
+  //let tcImg = image.textContent;
+
+  console.log("tcImage: ", tcImg);
+
+  //let tc
+
+
 
   let usrRate = image.previousElementSibling;
   let tcUsrRate = usrRate.textContent;
+
+  console.log("tcUsrRate: ", tcUsrRate);
+
+  let tcUsrRateVal = tcUsrRate.substring(0, 1);
+  console.log("tcUsrRateValu: ", tcUsrRateValu);
+
+
 
   let genre = usrRate.previousElementSibling;
   let tcGenre = genre.textContent;
@@ -120,7 +135,7 @@ function editMovie(e) {
       <input type="text" id="genre" value="${tcGenre}" name="genre">
     </label>
     <label> User rating:
-      <input type="number" id="userRating" value="${tcUsrRate}" name="userRating">
+      <input type="number" id="userRating" value="${tcUsrRateVal}" name="userRating">
     </label>
     <label> Image URL:
       <input type="text" id="image" value="${tcImg}" name="image">
@@ -198,7 +213,13 @@ function displayEditedMovie(divNode, updatedMovie) {
   divNode.children[2].innerHTML = updatedMovie.rating;
   divNode.children[3].innerHTML = updatedMovie.genre;
   divNode.children[4].innerHTML = updatedMovie.userRating;
-  divNode.children[5].innerHTML = updatedMovie.image;
+  //http://www.gstatic.com/tv/thumb/v22vodart/14113286/p14113286_v_v8_ad.jpg
+  let imageNode = document.createElement("img");
+  imageNode.setAttribute("src", `${updatedMovie.image}`);
+  imageNode.setAttribute("alt", `Not a valid image link`);
+  imageNode.setAttribute("style", "width: inherit; height: inherit;");
+  //imgNode.appendChild(imageNode);
+  divNode.children[5].innerHTML = imageNode;
 
   outList
 
@@ -246,12 +267,18 @@ function displayNewMovie(movie) {
 
   let usrRtNode = document.createElement("p");
   usrRtNode.setAttribute("class", "usrRating");
-  usrRtNode.innerHTML = `${movie.userRating}`;
+  // Fix star entity output
+  usrRtNode.innerHTML = `${movie.userRating}<span>&#9733;</span>`;
   divNode.appendChild(usrRtNode);
 
   let imgNode = document.createElement("p");
   imgNode.setAttribute("class", "image");
-  imgNode.innerHTML = `${movie.image}`;
+  let imageNode = document.createElement("img");
+  imageNode.setAttribute("src", `${movie.image}`);
+  imageNode.setAttribute("alt", `Not a valid image link`);
+  imageNode.setAttribute("style", "width: inherit; height: inherit;");
+  imgNode.appendChild(imageNode);
+  //imgNode.innerHTML = `${movie.image}`;
   divNode.appendChild(imgNode);
 
   //create edit node and append

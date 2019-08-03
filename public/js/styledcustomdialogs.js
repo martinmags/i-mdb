@@ -246,8 +246,7 @@ function displayNewMovie(movie) {
 
   let usrRtNode = document.createElement("p");
   usrRtNode.setAttribute("class", "usrRating");
-  // Fix star entity output
-  usrRtNode.innerHTML = `<span>&star;</span>${movie.userRating}`;
+  usrRtNode.innerHTML = `${movie.userRating}`;
   divNode.appendChild(usrRtNode);
 
   let imgNode = document.createElement("p");
@@ -417,7 +416,7 @@ function addMovDia() {
       <input type="text" id="title" name="title">
     </label>
     <label> Year :
-      <input type="number" id="year" name="year">
+      <input minlength="4" maxlength="4" type="number" id="year" name="year">
     </label>
     <label> Genre:
       <input type="text" id="genre" name="genre">

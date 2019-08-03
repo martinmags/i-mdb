@@ -3,9 +3,8 @@
 //You will also have to build some mechanism to login and logout of your simple CRUD
 //application ==> LOGOUT!!
 
-
 var loginForm = document.querySelector('#login-form');
-var submitBtn = document.querySelector('#logSubmit');
+var submitBtn = document.querySelector('#loginSubmit');
 const baseAPI = `http://introweb.tech/api`;
 
 function handleResponse(e) {
@@ -89,4 +88,4 @@ function submitRequest (e) {
 submitBtn.addEventListener("click", submitRequest);
 
 
-export {loginForm, submitRequest, handleResponse};
+export {loginForm, submitRequest, handleResponse, baseAPI};

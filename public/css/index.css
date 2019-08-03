@@ -1,8 +1,8 @@
 body {
-  background-image: url(/media/bard2.jpg); 
-  background-size: cover; 
+  background-image: url(/media/bard2.jpg);
+  background-size: cover;
   background-position: top;
-  background-attachment: scroll; 
+  background-attachment: scroll;
   background-clip: content-box;
   color: white;
 }
@@ -32,9 +32,9 @@ body > * {text-align: center; }
 
 /* height:85vh || width:5vw*/
 #content {
-  display: flex; 
+  display: flex;
   flex-direction: column;
-  width: 70vw; 
+  width: 70vw;
   height: 100vh;
   justify-content: flex-start;
   align-items: center;
@@ -131,7 +131,7 @@ p.edit {
   cursor: pointer;
 }
 
-#content > #addmov {
+#content > #addmov, #content > #logout {
   color: white;
   width: 10%;
   order: 2;
@@ -146,7 +146,13 @@ p.edit {
   background-color: transparent;
 }
 
-#content > #addmov:hover {
+#content > #logout {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+  }
+
+#content > #addmov:hover, #content > #logout:hover {
   color: black;
   background-color: white;
   cursor: pointer;
@@ -190,5 +196,3 @@ label {
   flex-direction: row;
   justify-content: space-evenly;
 }
-
-

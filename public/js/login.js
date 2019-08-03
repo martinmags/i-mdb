@@ -36,7 +36,7 @@ function handleResponse(e) {
 
     console.log("access_token: ", access_token);
     console.log("got access_token successfully\nredirecting to content (movielist) page");
-    window.location.replace('styledcrud.html');
+    window.location.replace('index.html');
     console.log("LOGIN SUCESSFULL");
 
     //console.log(JSON.parse(httpResp));

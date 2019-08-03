@@ -3,7 +3,7 @@
 // var movies = localStorage.getItem('styArray') ? JSON.parse(localStorage.getItem('styArray')) : new Array();
 // localStorage.setItem('styArray', JSON.stringify(movies));
 const access_token = localStorage.getItem('access_token');
-let logoutBtn = document.querySelector(".content > #logout");
+let logoutBtn = document.querySelector("#content > #logout");
 const baseURL = "http://introweb.tech/api";
 
 // NOTE: references DOM objecys of elements from the document
@@ -178,13 +178,13 @@ function defaultMovies() {
     //create edit node and append
     let ediNode = document.createElement("p");
     ediNode.setAttribute("class", "edit");
-    ediNode.innerHTML = `<img src="pen1.png" alt="pen icon"> Edit`;
+    ediNode.innerHTML = `<img src="media/pen1.png" alt="pen icon"> Edit`;
     divNode.appendChild(ediNode);
 
     //create delete node and append
     let delNode = document.createElement("p");
     delNode.setAttribute("class", "dlt");
-    delNode.innerHTML = `<img src="trash1.jpg" alt="trash icon"> Delete`;
+    delNode.innerHTML = `<img src="media/trash1.jpg" alt="trash icon"> Delete`;
     divNode.appendChild(delNode);
 
     outEl.appendChild(divNode);

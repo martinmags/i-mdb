@@ -39,7 +39,9 @@ body > * {text-align: center; }
   justify-content: flex-start;
   align-items: center;
 }
+
 #content > #result {
+  height: 85vh;
   color: white;
   display: flex;
   flex-direction: column;
@@ -49,6 +51,8 @@ body > * {text-align: center; }
   border-left: 21px double #009992;
   padding: 0;
   border-radius: 40px 40px 40px 40px;
+  overflow-y:scroll;
+  justify-content: space-evenly;
 }
 
 #result div{
@@ -127,9 +131,16 @@ p.dlt, p.edit {
   top: 1em;
   right: 1em;
 }
+
+#addmov{
+  position: absolute;
+  color: white;
+  top: 1em;
+  right: 10em;
+}
 #addmov, #logout{
   color: white;
-  width: 10%;
+  width: 4vw%;
   order: 2;
   align-self: center;
   display:inline-block;

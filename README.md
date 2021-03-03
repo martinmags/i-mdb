@@ -4,8 +4,8 @@ A movie listing web app with CRUD functionality by Martin Magsombol and Zekria S
 ### STATUS: Currently deployed, but non-functional as the connected API is no longer maintained and operating.
 ### TECH: HTML, CSS, JavaScript
 
-• Omit reliance on heavy modern frameworks; focused on a barebones tech stack of HTML, CSS, and JavaScript.
-• Created custom pop-up dialogues with JavaScript.
+- • Omit reliance on heavy modern frameworks; focused on a barebones tech stack of HTML, CSS, and JavaScript.
+- • Created custom pop-up dialogues with JavaScript.
 
 
 - [x] A user can create a movie listing.
